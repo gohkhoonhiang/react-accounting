@@ -1,4 +1,5 @@
 # react-accounting
+
 A personal/household accounting frontend app built using Reactjs
 
 # Getting Started with Create React App
