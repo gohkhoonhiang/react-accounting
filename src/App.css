@@ -1,0 +1,24 @@
+@import "normalize.css";
+@import "@blueprintjs/core/lib/css/blueprint.css";
+@import "@blueprintjs/icons/lib/css/blueprint-icons.css";
+
+.App {
+  text-align: center;
+  font-size: 16px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.App-main {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+}

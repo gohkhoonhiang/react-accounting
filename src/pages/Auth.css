@@ -1,0 +1,16 @@
+.Auth-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 4rem;
+}
+
+.Auth-container .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.Auth-container .error {
+    color: red;
+}
