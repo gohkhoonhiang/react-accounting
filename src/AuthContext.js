@@ -24,21 +24,6 @@ export function useAuthDispatch() {
 
 function authReducer(token, action) {
   switch (action.type) {
-    case 'login': {
-      return action.token;
-    }
-    case 'loading': {
-      return 'loading';
-    }
-    case 'signup': {
-      return 'signup';
-    }
-    case 'error': {
-      return 'error';
-    }
-    case 'logout': {
-      return null;
-    }
     default: {
       throw Error('Unknown action: ' + action.type);
     }

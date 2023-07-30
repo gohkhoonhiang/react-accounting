@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@blueprintjs/core';
 import axios from 'axios';
-import { useAuthDispatch } from '../AuthContext';
 import './Auth.css';
+import { useNavigate } from 'react-router';
+import Loading from '../Loading.js';
 
 function Logout() {
-  const dispatch = useAuthDispatch();
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   function submitLogout(e) {
     e.preventDefault();
@@ -13,29 +15,36 @@ function Logout() {
     const headers = {
       Authorization: `Bearer ${token}`
     };
+
+    setLoading(true);
+
     axios
       .post(`${process.env.REACT_APP_API_BASE}/logout`, { headers })
       .then(() => {
         localStorage.removeItem('go-accounting-auth');
-        dispatch({
-          type: 'logout'
-        });
+        setTimeout(() => {
+          navigate('/login');
+        }, 500);
       })
       .catch((err) => {
         console.error(err);
       });
   }
 
-  return (
-    <div className="Auth-container">
-      <h1>Logout</h1>
-      <div className="buttons">
-        <Button intent="Primary" onClick={submitLogout}>
-          Logout
-        </Button>
+  if (loading) {
+    return <Loading />;
+  } else {
+    return (
+      <div className="Auth-container">
+        <h1>Logout</h1>
+        <div className="buttons">
+          <Button intent="Primary" onClick={submitLogout}>
+            Logout
+          </Button>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default Logout;
