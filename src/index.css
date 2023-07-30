@@ -1,3 +1,6 @@
+@import '@blueprintjs/select/lib/css/blueprint-select.css';
+@import '@blueprintjs/datetime/lib/css/blueprint-datetime.css';
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',

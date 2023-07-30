@@ -1,0 +1,14 @@
+.Transfer-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.Transfer-form .bp5-form-group {
+    align-items: flex-start;
+}
+
+.Transfer-form .buttons {
+    display: flex;
+    gap: 0.5rem;
+}
