@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import AppNav from './components/AppNav.js';
 import { AuthProvider } from './AuthContext.js';
-import { Outlet } from 'react-router-dom';
+import AppContainer from './components/AppContainer';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -25,7 +25,7 @@ function App() {
         <main className="App-main">
           <AuthProvider>
             <AppNav></AppNav>
-            <Outlet />
+            <AppContainer></AppContainer>
           </AuthProvider>
         </main>
       </div>
