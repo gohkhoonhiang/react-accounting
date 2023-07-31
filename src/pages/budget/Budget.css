@@ -1,0 +1,27 @@
+.Budget-filter,
+.Budget-table {
+    gap: 1rem;
+}
+
+.Budget-table {
+    overflow: auto;
+}
+
+.Budget-filter .input-container,
+.Budget-table .input-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.budget-period .bp5-form-content {
+    display: flex;
+    gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .Budget-filter .input-container {
+        flex-direction: column;
+        gap: 0;
+    }
+}

@@ -16,6 +16,9 @@ function AppNav() {
           <Link className="bp5-button" role="button" tabIndex={0} to="/transfer">
             <Icon icon="swap-horizontal"></Icon> Transfer
           </Link>
+          <Link className="bp5-button" role="button" tabIndex={0} to="/budget">
+            <Icon icon="book"></Icon> Budget
+          </Link>
           <Link className="bp5-button" role="button" tabIndex={0} to="/logout">
             <Icon icon="log-out"></Icon> Logout
           </Link>

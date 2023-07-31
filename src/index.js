@@ -13,6 +13,7 @@ import App from './App.js';
 import Auth from './pages/Auth.js';
 import Home from './pages/Home.js';
 import Transfer from './pages/transfer/Transfer.js';
+import Budget from './pages/budget/Budget.js';
 import Logout from './pages/Logout.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -42,6 +43,14 @@ root.render(
             element={
               <ProtectedRoute>
                 <Transfer />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/budget"
+            element={
+              <ProtectedRoute>
+                <Budget />
               </ProtectedRoute>
             }
           />
