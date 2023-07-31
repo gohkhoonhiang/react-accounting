@@ -7,6 +7,15 @@
     overflow: auto;
 }
 
+.Budget-table .bp5-table-header,
+.Budget-table .bp5-table-cell,
+.Budget-table .bp5-table-no-wrap-text {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 14px;
+}
+
 .Budget-filter .input-container,
 .Budget-table .input-container {
     display: flex;

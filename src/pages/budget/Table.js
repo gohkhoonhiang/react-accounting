@@ -100,7 +100,7 @@ function BudgetTable() {
           noResults={<MenuItem disabled={true} text="No results." roleStructure="listoption" />}
           onItemSelect={(v) => handleAllocatedAccountChange(v, rowIndex)}>
           <Button
-            text={budgetRows[rowIndex].allocatedAccount ?? 'Select bucket...'}
+            text={allocatedAccountDisplay(budgetRows[rowIndex].allocatedAccount)}
             rightIcon="double-caret-vertical"
             placeholder="Select allocated account"
           />
@@ -113,6 +113,16 @@ function BudgetTable() {
     updateBudgetRow(value, rowIndex, 'allocatedAccount', (v) => v.value);
   };
 
+  function allocatedAccountDisplay(value) {
+    if (value === null) {
+      return 'Select account...';
+    }
+    const account = allocatedAccounts.find((account) => {
+      return account.value === value;
+    });
+    return account.label;
+  }
+
   const submitDisabled = false;
 
   function handleSubmit(e) {
@@ -124,7 +134,11 @@ function BudgetTable() {
     <Card className="Page-form Budget-table" elevation={Elevation.TWO}>
       <h3>Budgets</h3>
       <div className="input-container">
-        <Table2 numRows={budgetRows.length} cellRendererDependencies={[budgetRows]}>
+        <Table2
+          numRows={budgetRows.length}
+          cellRendererDependencies={[budgetRows]}
+          defaultRowHeight={50}
+          columnWidths={[null, null, null, null, null, null, 250]}>
           <Column name="Category" cellRenderer={categoryRenderer} />
           <Column name="Sub-category" cellRenderer={subCategoryRenderer} />
           <Column name="Remarks" cellRenderer={remarksRenderer} />
