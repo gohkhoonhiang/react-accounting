@@ -1,58 +1,61 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Elevation, Checkbox, Button, MenuItem } from '@blueprintjs/core';
 import { Select } from '@blueprintjs/select';
 import { Cell, Column, EditableCell2, Table2 } from '@blueprintjs/table';
 import { filterItem, renderItem } from '../../utils/select.js';
 import '../Page.css';
 import './Budget.css';
+import { useBudget, useBudgetDispatch } from './Context.js';
+import AddRowForm from './AddRow.js';
 
 function BudgetTable() {
-  const initialBudgetRows = [
-    {
-      category: 'utilities',
-      subCategory: 'electricity',
-      remarks: 'SP',
-      budgetedAmount: 100,
-      actualAmount: null,
-      allocated: false,
-      allocatedAccount: null
-    },
-    {
-      category: 'utilities',
-      subCategory: 'broadband',
-      remarks: 'MyRepublic',
-      budgetedAmount: 36.99,
-      actualAmount: 36.99,
-      allocated: true,
-      allocatedAccount: 'ocbc360_alice'
-    }
-  ];
+  const budgets = useBudget();
+  const dispatch = useBudgetDispatch();
+
+  useEffect(() => {
+    const initialBudgets = [
+      {
+        category: 'utilities',
+        subCategory: 'electricity',
+        remarks: 'SP',
+        budgetedAmount: 100,
+        actualAmount: null,
+        allocated: false,
+        allocatedAccount: null
+      },
+      {
+        category: 'utilities',
+        subCategory: 'broadband',
+        remarks: 'MyRepublic',
+        budgetedAmount: 36.99,
+        actualAmount: 36.99,
+        allocated: true,
+        allocatedAccount: 'ocbc360_alice'
+      }
+    ];
+
+    dispatch({ type: 'loaded', budgets: initialBudgets });
+  }, []);
 
   const allocatedAccounts = [
     { value: 'ocbc360_alice', label: 'OCBC 360 (Alice)' },
     { value: 'ocbc360_bob', label: 'OCBC 360 (Bob)' }
   ];
 
-  const [budgetRows, setBudgetRows] = useState(initialBudgetRows);
-
   function updateBudgetRow(value, rowIndex, field, formatFn) {
-    setBudgetRows((prev) => {
-      const updated = [...prev];
-      updated[rowIndex][field] = formatFn(value);
-      return updated;
-    });
+    dispatch({ type: 'update', budget: formatFn(value), rowIndex, field });
   }
 
-  const categoryRenderer = (rowIndex) => <Cell>{budgetRows[rowIndex].category}</Cell>;
-  const subCategoryRenderer = (rowIndex) => <Cell>{budgetRows[rowIndex].subCategory}</Cell>;
-  const remarksRenderer = (rowIndex) => <Cell>{budgetRows[rowIndex].remarks}</Cell>;
+  const categoryRenderer = (rowIndex) => <Cell>{budgets[rowIndex].category}</Cell>;
+  const subCategoryRenderer = (rowIndex) => <Cell>{budgets[rowIndex].subCategory}</Cell>;
+  const remarksRenderer = (rowIndex) => <Cell>{budgets[rowIndex].remarks}</Cell>;
 
   const budgetedAmountRenderer = (rowIndex, columnIndex) => {
     return (
       <EditableCell2
         rowIndex={rowIndex}
         columnIndex={columnIndex}
-        value={budgetRows[rowIndex].budgetedAmount}
+        value={budgets[rowIndex].budgetedAmount}
         onConfirm={handleBudgetedAmountConfirm}></EditableCell2>
     );
   };
@@ -66,7 +69,7 @@ function BudgetTable() {
       <EditableCell2
         rowIndex={rowIndex}
         columnIndex={columnIndex}
-        value={budgetRows[rowIndex].actualAmount}
+        value={budgets[rowIndex].actualAmount}
         onConfirm={handleActualAmountConfirm}></EditableCell2>
     );
   };
@@ -78,14 +81,14 @@ function BudgetTable() {
   const allocatedRenderer = (rowIndex, columnIndex) => (
     <Cell interactive={true} rowIndex={rowIndex} columnIndex={columnIndex}>
       <Checkbox
-        checked={budgetRows[rowIndex].allocated}
+        checked={budgets[rowIndex].allocated}
         onChange={(e) => handleAllocatedChange(e, rowIndex)}
       />
     </Cell>
   );
 
   const handleAllocatedChange = (e, rowIndex) => {
-    const value = !budgetRows[rowIndex].allocated;
+    const value = !budgets[rowIndex].allocated;
     updateBudgetRow(value, rowIndex, 'allocated', (v) => v);
   };
 
@@ -100,7 +103,7 @@ function BudgetTable() {
           noResults={<MenuItem disabled={true} text="No results." roleStructure="listoption" />}
           onItemSelect={(v) => handleAllocatedAccountChange(v, rowIndex)}>
           <Button
-            text={allocatedAccountDisplay(budgetRows[rowIndex].allocatedAccount)}
+            text={allocatedAccountDisplay(budgets[rowIndex].allocatedAccount)}
             rightIcon="double-caret-vertical"
             placeholder="Select allocated account"
           />
@@ -127,7 +130,13 @@ function BudgetTable() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log({ budgetRows });
+    console.log({ budgets });
+  }
+
+  const [addRowDialog, setAddRowDialog] = useState(false);
+  function openAddRowDialog(e) {
+    e.preventDefault();
+    setAddRowDialog(true);
   }
 
   return (
@@ -135,8 +144,8 @@ function BudgetTable() {
       <h3>Budgets</h3>
       <div className="input-container">
         <Table2
-          numRows={budgetRows.length}
-          cellRendererDependencies={[budgetRows]}
+          numRows={budgets.length}
+          cellRendererDependencies={[budgets]}
           defaultRowHeight={50}
           columnWidths={[null, null, null, null, null, null, 250]}>
           <Column name="Category" cellRenderer={categoryRenderer} />
@@ -152,7 +161,10 @@ function BudgetTable() {
         <Button intent="primary" disabled={submitDisabled} onClick={handleSubmit}>
           Update
         </Button>
+        <Button onClick={openAddRowDialog}>Add Row</Button>
       </div>
+
+      <AddRowForm dialog={addRowDialog} setDialog={setAddRowDialog}></AddRowForm>
     </Card>
   );
 }
