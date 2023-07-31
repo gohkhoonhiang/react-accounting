@@ -1,17 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import ProtectedRoute from './utils/ProtectedRoute.js';
+import reportWebVitals from './reportWebVitals';
+import { AuthProvider } from './AuthContext';
+
+import '@blueprintjs/icons/lib/css/blueprint-icons.css';
+import '@blueprintjs/core/lib/css/blueprint.css';
 import './index.css';
+
 import App from './App.js';
 import Auth from './pages/Auth.js';
 import Home from './pages/Home.js';
-import Transfer from './pages/Transfer.js';
+import Transfer from './pages/transfer/Transfer.js';
 import Logout from './pages/Logout.js';
-import ProtectedRoute from './utils/ProtectedRoute.js';
-import reportWebVitals from './reportWebVitals';
-import '@blueprintjs/icons/lib/css/blueprint-icons.css';
-import '@blueprintjs/core/lib/css/blueprint.css';
-import { AuthProvider } from './AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

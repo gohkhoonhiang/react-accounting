@@ -1,3 +1,9 @@
+.Transfer-page {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 .Transfer-form {
     display: flex;
     flex-direction: column;
