@@ -3,8 +3,11 @@ import { Button, Card, Elevation, FormGroup, HTMLSelect } from '@blueprintjs/cor
 import { DateInput } from '@blueprintjs/datetime';
 import '../Page.css';
 import './Budget.css';
+import { useBudgetSheetDispatch } from './Context';
 
 function BudgetFilter() {
+  const dispatch = useBudgetSheetDispatch();
+
   const minDate = new Date();
   minDate.setFullYear(minDate.getFullYear() - 10);
 
@@ -60,6 +63,17 @@ function BudgetFilter() {
     setEndDate(formatDateYYYYMMDD(periodEnd));
   }
 
+  function loadBudgetSheet() {
+    const sheet = {
+      startDate,
+      endDate,
+      totalBudgeted: 0,
+      totalAllocated: 0,
+      balanceToAllocate: 0
+    };
+    dispatch({ type: 'loaded', budgetSheet: sheet });
+  }
+
   useEffect(() => {
     setPeriodStartEnd();
   }, [budgetYear, budgetMonth]);
@@ -98,6 +112,7 @@ function BudgetFilter() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    loadBudgetSheet();
     console.log({ budgetPeriod, startDate, endDate });
   }
 

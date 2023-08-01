@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Elevation, Checkbox, Button, MenuItem } from '@blueprintjs/core';
+import { Card, Elevation, Checkbox, Button, ButtonGroup, MenuItem } from '@blueprintjs/core';
 import { Select } from '@blueprintjs/select';
 import { Cell, Column, EditableCell2, Table2 } from '@blueprintjs/table';
 import { filterItem, renderItem } from '../../utils/select.js';
 import '../Page.css';
 import './Budget.css';
-import { useBudget, useBudgetDispatch } from './Context.js';
+import { useBudget, useBudgetDispatch, useBudgetSheet } from './Context.js';
 import AddRowForm from './AddRow.js';
+import AddBudgetForm from './AddBudget.js';
 
 function BudgetTable() {
+  const budgetSheet = useBudgetSheet();
   const budgets = useBudget();
   const dispatch = useBudgetDispatch();
 
   useEffect(() => {
+    loadBudgetRows();
+  }, [budgetSheet]);
+
+  function loadBudgetRows() {
     const initialBudgets = [
       {
         category: 'utilities',
@@ -35,7 +41,7 @@ function BudgetTable() {
     ];
 
     dispatch({ type: 'loaded', budgets: initialBudgets });
-  }, []);
+  }
 
   const allocatedAccounts = [
     { value: 'ocbc360_alice', label: 'OCBC 360 (Alice)' },
@@ -139,9 +145,21 @@ function BudgetTable() {
     setAddRowDialog(true);
   }
 
+  const [addBudgetDialog, setAddBudgetDialog] = useState(false);
+  function openAddBudgetDialog(e) {
+    e.preventDefault();
+    setAddBudgetDialog(true);
+  }
+
   return (
     <Card className="Page-form Budget-table" elevation={Elevation.TWO}>
       <h3>Budgets</h3>
+      <ButtonGroup minimal={true} onMouseEnter={() => {}}>
+        <Button icon="add" onClick={openAddBudgetDialog}>
+          New Budget Sheet
+        </Button>
+        <Button icon="duplicate">Duplicate Budget Sheet</Button>
+      </ButtonGroup>
       <div className="input-container">
         <Table2
           numRows={budgets.length}
@@ -164,6 +182,7 @@ function BudgetTable() {
         <Button onClick={openAddRowDialog}>Add Row</Button>
       </div>
 
+      <AddBudgetForm dialog={addBudgetDialog} setDialog={setAddBudgetDialog}></AddBudgetForm>
       <AddRowForm dialog={addRowDialog} setDialog={setAddRowDialog}></AddRowForm>
     </Card>
   );

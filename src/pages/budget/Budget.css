@@ -1,6 +1,17 @@
 .Budget-filter,
+.Budget-sheet,
 .Budget-table {
     gap: 1rem;
+}
+
+.Budget-sheet .Field-set {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.Budget-sheet .Field-set .title {
+    font-weight: 600;
 }
 
 .Budget-table {
