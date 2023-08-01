@@ -39,13 +39,15 @@
     gap: 0.5rem;
 }
 
-.Budget-row-form {
+.Budget-row-form,
+.Budget-sheet-form {
     padding: 1rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
+.Budget-sheet-form-footer .actions,
 .Budget-row-form-footer .actions {
     display: flex;
 }

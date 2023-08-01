@@ -4,23 +4,10 @@ import { DateInput } from '@blueprintjs/datetime';
 import '../Page.css';
 import './Budget.css';
 import { useBudgetSheetDispatch } from './Context';
+import { minDate, maxDate, years, months, formatDateYYYYMMDD } from './utils.js';
 
 function BudgetFilter() {
   const dispatch = useBudgetSheetDispatch();
-
-  const minDate = new Date();
-  minDate.setFullYear(minDate.getFullYear() - 10);
-
-  const maxDate = new Date();
-  maxDate.setFullYear(maxDate.getFullYear() + 10);
-
-  const years = [''].concat(
-    Array.from(Array(maxDate.getFullYear() - minDate.getFullYear())).map((_, i) => {
-      return (minDate.getFullYear() + i).toString();
-    })
-  );
-
-  const months = ['', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 
   const today = new Date();
   const [budgetPeriod, setBudgetPeriod] = useState({
@@ -33,16 +20,8 @@ function BudgetFilter() {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
 
-  function formatDateYYYYMMDD(date) {
-    if (date === null) {
-      return '';
-    }
-
-    const year = date.getFullYear();
-    const month = months[date.getMonth() + 1];
-    const day = date.getDate().toString().padStart(2, '0');
-    return `${year}-${month}-${day}`;
-  }
+  const formatDate = useCallback((date) => formatDateYYYYMMDD(date), []);
+  const parseDate = useCallback((str) => new Date(str), []);
 
   function setPeriodStartEnd() {
     if (budgetYear === '' || budgetMonth === '') {
@@ -98,8 +77,6 @@ function BudgetFilter() {
 
   const handleStartDateChange = useCallback(setStartDate, []);
   const handleEndDateChange = useCallback(setEndDate, []);
-  const formatDate = useCallback((date) => formatDateYYYYMMDD(date), []);
-  const parseDate = useCallback((str) => new Date(str), []);
 
   function validDateRange() {
     if (startDate === '' || startDate === null || endDate === '' || endDate === null) {

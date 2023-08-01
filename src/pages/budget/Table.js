@@ -8,6 +8,7 @@ import './Budget.css';
 import { useBudget, useBudgetDispatch, useBudgetSheet } from './Context.js';
 import AddRowForm from './AddRow.js';
 import AddBudgetForm from './AddBudget.js';
+import DuplicateBudgetForm from './DuplicateBudget.js';
 
 function BudgetTable() {
   const budgetSheet = useBudgetSheet();
@@ -151,6 +152,12 @@ function BudgetTable() {
     setAddBudgetDialog(true);
   }
 
+  const [duplicateBudgetDialog, setDuplicateBudgetDialog] = useState(false);
+  function openDuplicateBudgetDialog(e) {
+    e.preventDefault();
+    setDuplicateBudgetDialog(true);
+  }
+
   return (
     <Card className="Page-form Budget-table" elevation={Elevation.TWO}>
       <h3>Budgets</h3>
@@ -158,7 +165,9 @@ function BudgetTable() {
         <Button icon="add" onClick={openAddBudgetDialog}>
           New Budget Sheet
         </Button>
-        <Button icon="duplicate">Duplicate Budget Sheet</Button>
+        <Button icon="duplicate" onClick={openDuplicateBudgetDialog}>
+          Duplicate Budget Sheet
+        </Button>
       </ButtonGroup>
       <div className="input-container">
         <Table2
@@ -183,6 +192,9 @@ function BudgetTable() {
       </div>
 
       <AddBudgetForm dialog={addBudgetDialog} setDialog={setAddBudgetDialog}></AddBudgetForm>
+      <DuplicateBudgetForm
+        dialog={duplicateBudgetDialog}
+        setDialog={setDuplicateBudgetDialog}></DuplicateBudgetForm>
       <AddRowForm dialog={addRowDialog} setDialog={setAddRowDialog}></AddRowForm>
     </Card>
   );
