@@ -1,0 +1,31 @@
+.Collapse-table {
+    display: flex;
+    flex-direction: column;
+}
+
+.Collapse-table .row.row-heading .col {
+    font-weight: 600;
+}
+
+.Collapse-table .row {
+    display: grid;
+    grid-template-columns: auto;
+    gap: 1rem;
+    border-top: 1px solid grey;
+}
+
+.Collapse-table .row.row-full {
+    font-size: 0.9rem;
+}
+
+.Collapse-table .row-full:last-child {
+    border-top: 0;
+}
+
+.Collapse-table .col {
+    padding: 0.5rem 1rem;
+}
+
+.Collapse-table .row.row-full .col.col-full {
+    padding: 0;
+}

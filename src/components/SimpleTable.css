@@ -1,0 +1,19 @@
+.Simple-table {
+    display: flex;
+    flex-direction: column;
+}
+
+.Simple-table .row.row-heading .col {
+    font-weight: 600;
+}
+
+.Simple-table .row {
+    display: grid;
+    grid-template-columns: auto;
+    gap: 1rem;
+    border-top: 1px solid grey;
+}
+
+.Simple-table .col {
+    padding: 0.5rem 1rem;
+}
