@@ -1,0 +1,52 @@
+.Accounts-table .table {
+    display: flex;
+    flex-direction: column;
+}
+
+.Accounts-table .table .row.row-heading .col {
+    font-weight: 600;
+}
+
+.Accounts-table .table .row {
+    display: grid;
+    grid-template-columns: 1fr 4fr 2fr 1fr;
+    gap: 1rem;
+    border-top: 1px solid grey;
+}
+
+.Accounts-table .table .row.row-full {
+    grid-template-columns: 1fr;
+    font-size: 0.9rem;
+}
+
+.Accounts-table .table .row-full:last-child {
+    border-top: 0;
+}
+
+.Accounts-table .bp5-collapse .table {
+    margin: 0 auto;
+    width: 90%;
+    padding: 0.5rem 0;
+}
+
+.Accounts-table .bp5-collapse .row {
+    grid-template-columns: 4fr 2fr 1fr;
+    border: 0;
+    border-bottom: 1px solid grey;
+}
+
+.Accounts-table .bp5-collapse .row:last-child {
+    border: 0;
+}
+
+.Accounts-table .table .col {
+    padding: 0.5rem 1rem;
+}
+
+.Accounts-table .table .row.row-full .col.col-full {
+    padding: 0;
+}
+
+.Accounts-table .inner-table {
+    padding-left: 1rem;
+}
