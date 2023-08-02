@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { Card, Elevation, Button, Collapse } from '@blueprintjs/core';
+import React from 'react';
+import { Card, Elevation } from '@blueprintjs/core';
+import SimpleTable from '../../components/SimpleTable';
+import CollapseTable from '../../components/CollapseTable';
 import './Account.css';
 
 function AccountsTable() {
@@ -46,86 +48,60 @@ function AccountsTable() {
     }
   ];
 
-  const [expandedRows, setExpandedRows] = useState({});
+  const headers = [
+    {
+      key: 'name',
+      label: 'Name'
+    },
+    {
+      key: 'amount',
+      label: 'Amount'
+    }
+  ];
 
-  function toggleRow(e, index) {
-    e.preventDefault();
+  const expandedField = 'buckets';
 
-    setExpandedRows((prev) => {
-      const updated = { ...prev };
-      if (prev[index]) {
-        delete updated[index];
-      } else {
-        updated[index] = true;
+  const bucketActions = [
+    {
+      icon: 'eye-open',
+      click: (e, row, index) => {
+        e.preventDefault();
+        alert(`Opened bucket row ${index}: ${row.name}`);
       }
+    }
+  ];
 
-      return updated;
-    });
-  }
+  const rows = accounts.map((account) => {
+    return {
+      ...account,
+      buckets: (
+        <SimpleTable
+          headers={headers}
+          rows={account.buckets}
+          rowActions={bucketActions}></SimpleTable>
+      )
+    };
+  });
 
-  function rowExpanded(index) {
-    return expandedRows[index];
-  }
+  const rowActions = [
+    {
+      icon: 'eye-open',
+      click: (e, row, index) => {
+        e.preventDefault();
+        alert(`Opened account row ${index}: ${row.name}`);
+      }
+    }
+  ];
 
   return (
     <Card className="Page-form Accounts-table" elevation={Elevation.TWO}>
       <h3>Accounts</h3>
       <div className="input-container">
-        <div className="table">
-          <div className="row row-heading">
-            <div className="col"></div>
-            <div className="col">Name</div>
-            <div className="col">Amount</div>
-            <div className="col">Actions</div>
-          </div>
-          {accounts.map((account, i) => (
-            <div key={i}>
-              <div className="row">
-                <div className="col">
-                  {rowExpanded(i) ? (
-                    <Button
-                      small={true}
-                      icon="chevron-up"
-                      onClick={(e) => toggleRow(e, i)}></Button>
-                  ) : (
-                    <Button
-                      small={true}
-                      icon="chevron-down"
-                      onClick={(e) => toggleRow(e, i)}></Button>
-                  )}
-                </div>
-                <div className="col">{account.name}</div>
-                <div className="col">{account.amount.toFixed(2)}</div>
-                <div className="col">
-                  <Button small={true} icon="eye-open"></Button>
-                </div>
-              </div>
-
-              <div className="row row-full">
-                <div className="col col-full">
-                  <Collapse isOpen={rowExpanded(i)}>
-                    <div className="table">
-                      <div className="row row-heading">
-                        <div className="col">Name</div>
-                        <div className="col">Amount</div>
-                        <div className="col">Actions</div>
-                      </div>
-                      {account.buckets.map((bucket, j) => (
-                        <div className="row" key={j}>
-                          <div className="col">{bucket.name}</div>
-                          <div className="col">{bucket.amount.toFixed(2)}</div>
-                          <div className="col">
-                            <Button small={true} icon="eye-open"></Button>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </Collapse>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <CollapseTable
+          headers={headers}
+          rows={rows}
+          rowActions={rowActions}
+          expandedField={expandedField}></CollapseTable>
       </div>
     </Card>
   );
