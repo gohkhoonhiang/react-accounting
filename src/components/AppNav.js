@@ -13,6 +13,9 @@ function AppNav() {
           <Link className="bp5-button" role="button" tabIndex={0} to="/">
             <Icon icon="home"></Icon> Home
           </Link>
+          <Link className="bp5-button" role="button" tabIndex={0} to="/accounts">
+            <Icon icon="bank-account"></Icon> Accounts
+          </Link>
           <Link className="bp5-button" role="button" tabIndex={0} to="/transfer">
             <Icon icon="swap-horizontal"></Icon> Transfer
           </Link>
