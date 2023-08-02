@@ -15,5 +15,14 @@
 }
 
 .Simple-table .col {
+    text-align: left;
     padding: 0.5rem 1rem;
+}
+
+.Simple-table .row.row-no-data {
+    grid-template-columns: 1fr !important;
+}
+
+.Simple-table .row.row-no-data .col {
+    text-align: center;
 }

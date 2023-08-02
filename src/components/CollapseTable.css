@@ -23,9 +23,18 @@
 }
 
 .Collapse-table .col {
+    text-align: left;
     padding: 0.5rem 1rem;
 }
 
 .Collapse-table .row.row-full .col.col-full {
     padding: 0;
+}
+
+.Collapse-table .row.row-no-data {
+    grid-template-columns: 1fr !important;
+}
+
+.Collapse-table .row.row-no-data .col {
+    text-align: center;
 }

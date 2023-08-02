@@ -35,43 +35,52 @@ function CollapseTable({ headers, rows, rowActions, expandedField }) {
         ))}
         {rowActions.length > 0 ? <div className="col">Actions</div> : <></>}
       </div>
-      {rows.map((row, j) => (
-        <div key={j}>
-          <div className="row">
-            <div className="col">
-              {rowExpanded(j) ? (
-                <Button small={true} icon="chevron-up" onClick={(e) => toggleRow(e, j)}></Button>
-              ) : (
-                <Button small={true} icon="chevron-down" onClick={(e) => toggleRow(e, j)}></Button>
-              )}
-            </div>
-            {headers.map((header, k) => (
-              <div className="col" key={k}>
-                {row[header.key]}
-              </div>
-            ))}
-            {rowActions.length > 0 ? (
+      {rows.length > 0 ? (
+        rows.map((row, j) => (
+          <div key={j}>
+            <div className="row">
               <div className="col">
-                {rowActions.map((action, l) => (
+                {rowExpanded(j) ? (
+                  <Button small={true} icon="chevron-up" onClick={(e) => toggleRow(e, j)}></Button>
+                ) : (
                   <Button
                     small={true}
-                    icon={action.icon}
-                    onClick={(e) => action.click(e, row, j)}
-                    key={l}></Button>
-                ))}
+                    icon="chevron-down"
+                    onClick={(e) => toggleRow(e, j)}></Button>
+                )}
               </div>
-            ) : (
-              <></>
-            )}
-          </div>
+              {headers.map((header, k) => (
+                <div className="col" key={k}>
+                  {row[header.key]}
+                </div>
+              ))}
+              {rowActions.length > 0 ? (
+                <div className="col">
+                  {rowActions.map((action, l) => (
+                    <Button
+                      small={true}
+                      icon={action.icon}
+                      onClick={(e) => action.click(e, row, j)}
+                      key={l}></Button>
+                  ))}
+                </div>
+              ) : (
+                <></>
+              )}
+            </div>
 
-          <div className="row row-full">
-            <div className="col col-full">
-              <Collapse isOpen={rowExpanded(j)}>{row[expandedField]}</Collapse>
+            <div className="row row-full">
+              <div className="col col-full">
+                <Collapse isOpen={rowExpanded(j)}>{row[expandedField]}</Collapse>
+              </div>
             </div>
           </div>
+        ))
+      ) : (
+        <div className="row row-no-data">
+          <div className="col">No data.</div>
         </div>
-      ))}
+      )}
     </div>
   );
 }
