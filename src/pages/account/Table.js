@@ -1,10 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Card, Elevation, Button, Dialog, DialogBody, DialogFooter } from '@blueprintjs/core';
 import SimpleTable from '../../components/SimpleTable';
 import CollapseTable from '../../components/CollapseTable';
 import './Account.css';
 
 function AccountsTable() {
+  const [accountTransactionsDialog, setAccountTransactionsDialog] = useState(false);
+  const [accountTransactionsDialogTitle, setAccountTransactionsDialogTitle] =
+    useState('Account Transactions');
+  const [currentAccount, setCurrentAccount] = useState({});
+
+  const [accountTransactionsPagination, setAccountTransactionsPagination] = useState({
+    offset: 0,
+    limit: 5,
+    total: currentAccount?.transactions?.length || 0
+  });
+
+  const accountTransactions = useMemo(() => {
+    if (Object.keys(currentAccount).length > 0) {
+      const { offset, limit, total } = accountTransactionsPagination;
+      const startIndex = offset;
+      const endIndex = Math.min(startIndex + limit, total);
+      return currentAccount.transactions.slice(startIndex, endIndex);
+    } else {
+      return [];
+    }
+  });
+
+  const [bucketTransactionsDialog, setBucketTransactionsDialog] = useState(false);
+  const [bucketTransactionsDialogTitle, setBucketTransactionsDialogTitle] =
+    useState('Bucket Transactions');
+  const [currentBucket, setCurrentBucket] = useState({});
+
+  const [bucketTransactionsPagination, setBucketTransactionsPagination] = useState({
+    offset: 0,
+    limit: 5,
+    total: currentBucket?.transactions?.length || 0
+  });
+
+  const bucketTransactions = useMemo(() => {
+    if (Object.keys(currentBucket).length > 0) {
+      const { offset, limit, total } = bucketTransactionsPagination;
+      const startIndex = offset;
+      const endIndex = Math.min(startIndex + limit, total);
+      return currentBucket.transactions.slice(startIndex, endIndex);
+    } else {
+      return [];
+    }
+  });
+
   const accounts = [
     {
       name: 'OCBC 360 (Alice)',
@@ -17,14 +61,50 @@ function AccountsTable() {
             {
               description: 'Kopitiam',
               transactionDate: '2023-01-12',
-              amount: 7.23
+              amount: -7.23
+            },
+            {
+              description: 'Fairprice',
+              transactionDate: '2023-01-16',
+              amount: -23.73
+            },
+            {
+              description: 'Giant',
+              transactionDate: '2023-01-21',
+              amount: -37.92
+            },
+            {
+              description: 'Kopitiam',
+              transactionDate: '2023-01-25',
+              amount: -13.84
+            },
+            {
+              description: 'Fairprice',
+              transactionDate: '2023-01-25',
+              amount: -28.45
+            },
+            {
+              description: 'Koufu',
+              transactionDate: '2023-01-26',
+              amount: -13.73
+            },
+            {
+              description: 'Fairprice',
+              transactionDate: '2023-01-26',
+              amount: -20.35
             }
           ]
         },
         {
           name: 'Vacation fund',
           amount: 1725.41,
-          transactions: []
+          transactions: [
+            {
+              description: 'Booking.com',
+              transactionDate: '2023-01-23',
+              amount: -2396.23
+            }
+          ]
         },
         {
           name: 'Health fund',
@@ -98,8 +178,9 @@ function AccountsTable() {
       icon: 'eye-open',
       click: (e, row) => {
         e.preventDefault();
-        setBucketTransactions(row.transactions);
+        setCurrentBucket(row);
         setBucketTransactionsDialogTitle(`${row.name} - Transactions`);
+        setBucketTransactionsPagination({ offset: 0, limit: 5, total: row.transactions.length });
         setBucketTransactionsDialog(true);
       }
     }
@@ -122,8 +203,9 @@ function AccountsTable() {
       icon: 'eye-open',
       click: (e, row) => {
         e.preventDefault();
-        setAccountTransactions(row.transactions);
+        setCurrentAccount(row);
         setAccountTransactionsDialogTitle(`${row.name} - Transactions`);
+        setAccountTransactionsPagination({ offset: 0, limit: 5, total: row.transactions.length });
         setAccountTransactionsDialog(true);
       }
     }
@@ -144,24 +226,60 @@ function AccountsTable() {
     }
   ];
 
-  const [accountTransactionsDialog, setAccountTransactionsDialog] = useState(false);
-  const [accountTransactionsDialogTitle, setAccountTransactionsDialogTitle] =
-    useState('Account Transactions');
-  const [accountTransactions, setAccountTransactions] = useState([]);
+  const accountTransactionsPageLeft = (e) => {
+    e.preventDefault();
+    const currentOffset = accountTransactionsPagination.offset;
+    const currentLimit = accountTransactionsPagination.limit;
+    const newOffset = Math.max(currentOffset - currentLimit, 0);
+    setAccountTransactionsPagination((prev) => {
+      return { ...prev, offset: newOffset };
+    });
+  };
+
+  const accountTransactionsPageRight = (e) => {
+    e.preventDefault();
+    const currentOffset = accountTransactionsPagination.offset;
+    const currentLimit = accountTransactionsPagination.limit;
+    const currentTotal = accountTransactionsPagination.total;
+    const newOffset = Math.min(currentOffset + currentLimit, currentTotal);
+    setAccountTransactionsPagination((prev) => {
+      return { ...prev, offset: newOffset };
+    });
+  };
+
+  const bucketTransactionsPageLeft = (e) => {
+    e.preventDefault();
+    const currentOffset = bucketTransactionsPagination.offset;
+    const currentLimit = bucketTransactionsPagination.limit;
+    const newOffset = Math.max(currentOffset - currentLimit, 0);
+    setBucketTransactionsPagination((prev) => {
+      return { ...prev, offset: newOffset };
+    });
+  };
+
+  const bucketTransactionsPageRight = (e) => {
+    e.preventDefault();
+    const currentOffset = bucketTransactionsPagination.offset;
+    const currentLimit = bucketTransactionsPagination.limit;
+    const currentTotal = bucketTransactionsPagination.total;
+    const newOffset = Math.min(currentOffset + currentLimit, currentTotal);
+    setBucketTransactionsPagination((prev) => {
+      return { ...prev, offset: newOffset };
+    });
+  };
 
   function closeAccountTransactionsDialog(e) {
     e.preventDefault();
     setAccountTransactionsDialog(false);
+    setCurrentAccount({});
+    setAccountTransactionsPagination({ offset: 0, limit: 5, total: 0 });
   }
-
-  const [bucketTransactionsDialog, setBucketTransactionsDialog] = useState(false);
-  const [bucketTransactionsDialogTitle, setBucketTransactionsDialogTitle] =
-    useState('Bucket Transactions');
-  const [bucketTransactions, setBucketTransactions] = useState([]);
 
   function closeBucketTransactionsDialog(e) {
     e.preventDefault();
     setBucketTransactionsDialog(false);
+    setCurrentBucket({});
+    setBucketTransactionsPagination({ offset: 0, limit: 5, total: 0 });
   }
 
   return (
@@ -185,7 +303,10 @@ function AccountsTable() {
           <SimpleTable
             headers={transactionHeaders}
             rows={accountTransactions}
-            rowActions={[]}></SimpleTable>
+            rowActions={[]}
+            pagination={accountTransactionsPagination}
+            onPageLeft={accountTransactionsPageLeft}
+            onPageRight={accountTransactionsPageRight}></SimpleTable>
         </DialogBody>
         <DialogFooter actions={<Button text="Close" onClick={closeAccountTransactionsDialog} />} />
       </Dialog>
@@ -200,7 +321,10 @@ function AccountsTable() {
           <SimpleTable
             headers={transactionHeaders}
             rows={bucketTransactions}
-            rowActions={[]}></SimpleTable>
+            rowActions={[]}
+            pagination={bucketTransactionsPagination}
+            onPageLeft={bucketTransactionsPageLeft}
+            onPageRight={bucketTransactionsPageRight}></SimpleTable>
         </DialogBody>
         <DialogFooter actions={<Button text="Close" onClick={closeBucketTransactionsDialog} />} />
       </Dialog>

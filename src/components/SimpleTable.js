@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button } from '@blueprintjs/core';
 import './SimpleTable.css';
+import Paginator from './Paginator';
 
-function SimpleTable({ headers, rows, rowActions }) {
+function SimpleTable({ headers, rows, rowActions, pagination, onPageLeft, onPageRight }) {
   return (
     <div className="Simple-table">
       <div className="row row-heading">
@@ -40,6 +41,18 @@ function SimpleTable({ headers, rows, rowActions }) {
         <div className="row row-no-data">
           <div className="col">No data.</div>
         </div>
+      )}
+      {pagination ? (
+        <div className="row row-footer">
+          <Paginator
+            offset={pagination.offset}
+            limit={pagination.limit}
+            total={pagination.total}
+            onPageLeft={onPageLeft}
+            onPageRight={onPageRight}></Paginator>
+        </div>
+      ) : (
+        <></>
       )}
     </div>
   );

@@ -19,7 +19,8 @@
     padding: 0.5rem 1rem;
 }
 
-.Simple-table .row.row-no-data {
+.Simple-table .row.row-no-data,
+.Simple-table .row.row-footer {
     grid-template-columns: 1fr !important;
 }
 
