@@ -1,0 +1,23 @@
+.Stocks-table .input-container {
+  width: 100%;
+}
+
+.Stocks-table .Collapse-table .row {
+  grid-template-columns: 1fr 4fr 2fr 2fr 1fr;
+}
+
+.Stocks-table .Collapse-table .row.row-full {
+  grid-template-columns: 1fr;
+}
+
+.Stocks-table .Collapse-table .details {
+  margin: 0 auto;
+  padding: 1rem 0;
+  width: 80%;
+}
+
+.Stocks-table .Collapse-table .details .chart {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0 2rem 0;
+}
