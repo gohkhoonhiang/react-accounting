@@ -132,7 +132,8 @@ function DuplicateBudgetForm({ dialog, setDialog }) {
         <FormGroup
           className="budget-period"
           label="From Budget Period"
-          labelFor="from-budget-period">
+          labelFor="from-budget-period"
+        >
           <HTMLSelect
             value={fromBudgetYear}
             placeholder="Choose year"

@@ -1,27 +1,27 @@
 .Accounts-table .Collapse-table .row {
-    grid-template-columns: 1fr 4fr 2fr 1fr;
+  grid-template-columns: 1fr 4fr 2fr 1fr;
 }
 
 .Accounts-table .Collapse-table .row.row-full {
-    grid-template-columns: 1fr;
+  grid-template-columns: 1fr;
 }
 
 .bp5-collapse-body .Simple-table {
-    margin: 0 auto;
-    width: 90%;
+  margin: 0 auto;
+  width: 90%;
 }
 
 .bp5-collapse-body .Simple-table .row-heading,
 .bp5-collapse-body .Simple-table .row {
-    grid-template-columns: 4fr 2fr 1fr;
+  grid-template-columns: 4fr 2fr 1fr;
 }
 
 .Account-transactions-dialog,
 .Bucket-transactions-dialog {
-    width: 70%;
+  width: 70%;
 }
 
 .Account-transactions-dialog .Simple-table .row,
 .Bucket-transactions-dialog .Simple-table .row {
-    grid-template-columns: 3fr 1fr 1fr;
+  grid-template-columns: 3fr 1fr 1fr;
 }

@@ -1,19 +1,19 @@
 .Paginator {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding-top: 1rem;
 }
 
 .Paginator .page-numbers,
 .Paginator .pagers {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .Paginator .page-numbers .start-count,
 .Paginator .page-numbers .end-count,
 .Paginator .page-numbers .total-count {
-    font-weight: 600;
+  font-weight: 600;
 }

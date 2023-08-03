@@ -92,7 +92,8 @@ function TransferExpense() {
           itemPredicate={filterItem}
           itemRenderer={renderItem}
           noResults={<MenuItem disabled={true} text="No results." roleStructure="listoption" />}
-          onItemSelect={setFromBucket}>
+          onItemSelect={setFromBucket}
+        >
           <Button
             text={fromBucket ? fromBucket.label : 'Select bucket...'}
             rightIcon="double-caret-vertical"
@@ -107,7 +108,8 @@ function TransferExpense() {
           itemPredicate={filterItem}
           itemRenderer={renderItem}
           noResults={<MenuItem disabled={true} text="No results." roleStructure="listoption" />}
-          onItemSelect={setPaidBy}>
+          onItemSelect={setPaidBy}
+        >
           <Button
             text={paidBy ? paidBy.label : 'Select paid by...'}
             rightIcon="double-caret-vertical"
@@ -122,7 +124,8 @@ function TransferExpense() {
           itemPredicate={filterItem}
           itemRenderer={renderItem}
           noResults={<MenuItem disabled={true} text="No results." roleStructure="listoption" />}
-          onItemSelect={setToAccount}>
+          onItemSelect={setToAccount}
+        >
           <Button
             text={toAccount ? toAccount.label : 'Select to account...'}
             rightIcon="double-caret-vertical"
@@ -137,7 +140,8 @@ function TransferExpense() {
           itemPredicate={filterItem}
           itemRenderer={renderItem}
           noResults={<MenuItem disabled={true} text="No results." roleStructure="listoption" />}
-          onItemSelect={setCategory}>
+          onItemSelect={setCategory}
+        >
           <Button
             text={category ? category.label : 'Select category...'}
             rightIcon="double-caret-vertical"

@@ -1,29 +1,29 @@
 .Simple-table {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .Simple-table .row.row-heading .col {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .Simple-table .row {
-    display: grid;
-    grid-template-columns: auto;
-    gap: 1rem;
-    border-top: 1px solid grey;
+  display: grid;
+  grid-template-columns: auto;
+  gap: 1rem;
+  border-top: 1px solid grey;
 }
 
 .Simple-table .col {
-    text-align: left;
-    padding: 0.5rem 1rem;
+  text-align: left;
+  padding: 0.5rem 1rem;
 }
 
 .Simple-table .row.row-no-data,
 .Simple-table .row.row-footer {
-    grid-template-columns: 1fr !important;
+  grid-template-columns: 1fr !important;
 }
 
 .Simple-table .row.row-no-data .col {
-    text-align: center;
+  text-align: center;
 }

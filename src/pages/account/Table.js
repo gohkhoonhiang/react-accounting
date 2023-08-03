@@ -199,7 +199,8 @@ function AccountsTable() {
         <SimpleTable
           headers={headers}
           rows={account.buckets}
-          rowActions={bucketActions}></SimpleTable>
+          rowActions={bucketActions}
+        ></SimpleTable>
       )
     };
   });
@@ -320,7 +321,8 @@ function AccountsTable() {
           expandedField={expandedField}
           pagination={accountsPagination}
           onPageLeft={accountsPageLeft}
-          onPageRight={accountsPageRight}></CollapseTable>
+          onPageRight={accountsPageRight}
+        ></CollapseTable>
       </div>
 
       <Dialog
@@ -328,7 +330,8 @@ function AccountsTable() {
         title={accountTransactionsDialogTitle}
         icon="list"
         isOpen={accountTransactionsDialog}
-        onClose={closeAccountTransactionsDialog}>
+        onClose={closeAccountTransactionsDialog}
+      >
         <DialogBody>
           <SimpleTable
             headers={transactionHeaders}
@@ -336,7 +339,8 @@ function AccountsTable() {
             rowActions={[]}
             pagination={accountTransactionsPagination}
             onPageLeft={accountTransactionsPageLeft}
-            onPageRight={accountTransactionsPageRight}></SimpleTable>
+            onPageRight={accountTransactionsPageRight}
+          ></SimpleTable>
         </DialogBody>
         <DialogFooter actions={<Button text="Close" onClick={closeAccountTransactionsDialog} />} />
       </Dialog>
@@ -346,7 +350,8 @@ function AccountsTable() {
         title={bucketTransactionsDialogTitle}
         icon="list"
         isOpen={bucketTransactionsDialog}
-        onClose={closeBucketTransactionsDialog}>
+        onClose={closeBucketTransactionsDialog}
+      >
         <DialogBody>
           <SimpleTable
             headers={transactionHeaders}
@@ -354,7 +359,8 @@ function AccountsTable() {
             rowActions={[]}
             pagination={bucketTransactionsPagination}
             onPageLeft={bucketTransactionsPageLeft}
-            onPageRight={bucketTransactionsPageRight}></SimpleTable>
+            onPageRight={bucketTransactionsPageRight}
+          ></SimpleTable>
         </DialogBody>
         <DialogFooter actions={<Button text="Close" onClick={closeBucketTransactionsDialog} />} />
       </Dialog>

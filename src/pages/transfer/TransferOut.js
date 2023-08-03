@@ -56,7 +56,8 @@ function TransferOut() {
           itemPredicate={filterItem}
           itemRenderer={renderItem}
           noResults={<MenuItem disabled={true} text="No results." roleStructure="listoption" />}
-          onItemSelect={setFromBucket}>
+          onItemSelect={setFromBucket}
+        >
           <Button
             text={fromBucket ? fromBucket.label : 'Select bucket...'}
             rightIcon="double-caret-vertical"

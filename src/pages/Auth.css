@@ -1,26 +1,26 @@
 .Auth-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
 }
 
 .Auth-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 4rem;
 }
 
 .Auth-container .buttons {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .Auth-container .error {
-    color: red;
+  color: red;
 }
