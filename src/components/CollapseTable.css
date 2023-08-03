@@ -31,7 +31,8 @@
     padding: 0;
 }
 
-.Collapse-table .row.row-no-data {
+.Collapse-table .row.row-no-data,
+.Collapse-table .row.row-footer {
     grid-template-columns: 1fr !important;
 }
 

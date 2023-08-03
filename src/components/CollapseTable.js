@@ -1,8 +1,17 @@
 import React, { useState } from 'react';
 import { Button, Collapse } from '@blueprintjs/core';
+import Paginator from './Paginator';
 import './CollapseTable.css';
 
-function CollapseTable({ headers, rows, rowActions, expandedField }) {
+function CollapseTable({
+  headers,
+  rows,
+  rowActions,
+  expandedField,
+  pagination,
+  onPageLeft,
+  onPageRight
+}) {
   const [expandedRows, setExpandedRows] = useState({});
 
   function toggleRow(e, index) {
@@ -80,6 +89,18 @@ function CollapseTable({ headers, rows, rowActions, expandedField }) {
         <div className="row row-no-data">
           <div className="col">No data.</div>
         </div>
+      )}
+      {pagination ? (
+        <div className="row row-footer">
+          <Paginator
+            offset={pagination.offset}
+            limit={pagination.limit}
+            total={pagination.total}
+            onPageLeft={onPageLeft}
+            onPageRight={onPageRight}></Paginator>
+        </div>
+      ) : (
+        <></>
       )}
     </div>
   );

@@ -171,6 +171,12 @@ function AccountsTable() {
     }
   ];
 
+  const [accountsPagination, setAccountsPagination] = useState({
+    offset: 0,
+    limit: 5,
+    total: accounts.length
+  });
+
   const expandedField = 'buckets';
 
   const bucketActions = [
@@ -225,6 +231,27 @@ function AccountsTable() {
       label: 'Amount'
     }
   ];
+
+  const accountsPageLeft = (e) => {
+    e.preventDefault();
+    const currentOffset = accountsPagination.offset;
+    const currentLimit = accountsPagination.limit;
+    const newOffset = Math.max(currentOffset - currentLimit, 0);
+    setAccountsPagination((prev) => {
+      return { ...prev, offset: newOffset };
+    });
+  };
+
+  const accountsPageRight = (e) => {
+    e.preventDefault();
+    const currentOffset = accountsPagination.offset;
+    const currentLimit = accountsPagination.limit;
+    const currentTotal = accountsPagination.total;
+    const newOffset = Math.min(currentOffset + currentLimit, currentTotal);
+    setAccountsPagination((prev) => {
+      return { ...prev, offset: newOffset };
+    });
+  };
 
   const accountTransactionsPageLeft = (e) => {
     e.preventDefault();
@@ -290,7 +317,10 @@ function AccountsTable() {
           headers={headers}
           rows={rows}
           rowActions={rowActions}
-          expandedField={expandedField}></CollapseTable>
+          expandedField={expandedField}
+          pagination={accountsPagination}
+          onPageLeft={accountsPageLeft}
+          onPageRight={accountsPageRight}></CollapseTable>
       </div>
 
       <Dialog
