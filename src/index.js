@@ -13,6 +13,7 @@ import App from './App.js';
 import Auth from './pages/Auth.js';
 import Home from './pages/Home.js';
 import Account from './pages/account/Account.js';
+import Expense from './pages/expense/Expense.js';
 import Transfer from './pages/transfer/Transfer.js';
 import Budget from './pages/budget/Budget.js';
 import Logout from './pages/Logout.js';
@@ -44,6 +45,14 @@ root.render(
             element={
               <ProtectedRoute>
                 <Account />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/expenses"
+            element={
+              <ProtectedRoute>
+                <Expense />
               </ProtectedRoute>
             }
           />

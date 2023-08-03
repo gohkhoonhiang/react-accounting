@@ -1,0 +1,19 @@
+.Expenses-table {
+  overflow: auto;
+}
+
+.Expenses-table .bp5-table-column-name {
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.Expenses-table .bp5-table-cell {
+  text-align: left;
+}
+
+.Expenses-table .bp5-table-cell-col-0,
+.Expenses-table .bp5-table-last-in-row,
+.Expenses-table .bp5-table-cell-row-12,
+.Expenses-table .bp5-table-cell-row-13 {
+  font-weight: 600;
+}
