@@ -21,3 +21,31 @@
   justify-content: center;
   padding: 1rem 0 2rem 0;
 }
+
+.Stock-details-dialog {
+  width: 80%;
+}
+
+.Purchase-history .Collapse-table .row,
+.Sale-history .Collapse-table .row {
+  grid-template-columns: 1fr repeat(6, 2fr);
+}
+
+.Purchase-history .Collapse-table .row.row-full,
+.Sale-history .Collapse-table .row.row-full {
+  grid-template-columns: 1fr;
+}
+
+.Purchase-history .Collapse-table .details,
+.Sale-history .Collapse-table .details {
+  padding: 1rem 0 2rem 0;
+}
+
+.Dividend-history .Simple-table .row,
+.Yield-history .Simple-table .row {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.Price-history .Simple-table .row {
+  grid-template-columns: repeat(2, 1fr);
+}

@@ -13,6 +13,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import CollapseTable from '../../components/CollapseTable';
 import InfoCard from '../../components/InfoCard';
+import StockDetails from './Details';
 import './Stock.css';
 
 ChartJS.register(
@@ -134,11 +135,16 @@ function StocksTable() {
     });
   });
 
+  const [detailsDialog, setDetailsDialog] = useState(false);
+  const [detailsDialogTitle, setDetailsDialogTitle] = useState('');
+
   const rowActions = [
     {
       icon: 'eye-open',
-      click: (e) => {
+      click: (e, row) => {
         e.preventDefault();
+        setDetailsDialog(true);
+        setDetailsDialogTitle(row.name);
       }
     }
   ];
@@ -179,6 +185,11 @@ function StocksTable() {
           onPageLeft={stocksPageLeft}
           onPageRight={stocksPageRight}></CollapseTable>
       </div>
+
+      <StockDetails
+        dialog={detailsDialog}
+        setDialog={setDetailsDialog}
+        dialogTitle={detailsDialogTitle}></StockDetails>
     </Card>
   );
 }
