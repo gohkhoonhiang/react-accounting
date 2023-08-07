@@ -3,7 +3,7 @@
 }
 
 .Stocks-table .Collapse-table .row {
-  grid-template-columns: 1fr 4fr 2fr 2fr 1fr;
+  grid-template-columns: 1fr 4fr 2fr 2fr 2fr;
 }
 
 .Stocks-table .Collapse-table .row.row-full {
@@ -48,4 +48,8 @@
 
 .Price-history .Simple-table .row {
   grid-template-columns: repeat(2, 1fr);
+}
+
+.Stock-form-footer .actions {
+  display: flex;
 }

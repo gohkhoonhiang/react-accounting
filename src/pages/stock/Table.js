@@ -14,6 +14,7 @@ import { Line } from 'react-chartjs-2';
 import CollapseTable from '../../components/CollapseTable';
 import InfoCard from '../../components/InfoCard';
 import StockDetails from './Details';
+import EditStockForm from './EditStock';
 import './Stock.css';
 
 ChartJS.register(
@@ -42,11 +43,33 @@ function StocksTable() {
   const stocks = [
     {
       name: 'SSB Jun 2022',
+      ticker: 'SBJUN22.GX22060F',
       totalPurchaseSum: 15000,
       shareCount: 15000,
       dividendPayout: 252,
       unitPrice: 1,
       averageYield: 2.4,
+      monthsElapsed: 12,
+      chart: {
+        labels: Array.from(Array(10)).map((_, i) => 2022 + i),
+        datasets: [
+          {
+            id: '1',
+            label: 'Yield %',
+            data: [0.42, 0.57, 0.85, 1.25, 1.28, 1.34, 1.47, 1.49, 1.62, 1.75],
+            borderColor: borderColors[Math.floor(Math.random() * borderColors.length)]
+          }
+        ]
+      }
+    },
+    {
+      name: 'SSB Dec 2022',
+      ticker: 'SBDEC22.GX22120S',
+      totalPurchaseSum: 10000,
+      shareCount: 10000,
+      dividendPayout: 3486,
+      unitPrice: 1,
+      averageYield: 3.49,
       monthsElapsed: 12,
       chart: {
         labels: Array.from(Array(10)).map((_, i) => 2022 + i),
@@ -96,6 +119,10 @@ function StocksTable() {
       const heading = stock.name;
       const fields = [
         {
+          title: 'Ticker',
+          value: stock.ticker
+        },
+        {
           title: 'Total Share Count',
           value: stock.shareCount
         },
@@ -138,9 +165,44 @@ function StocksTable() {
   const [detailsDialog, setDetailsDialog] = useState(false);
   const [detailsDialogTitle, setDetailsDialogTitle] = useState('');
 
+  const [editDialog, setEditDialog] = useState(false);
+  const [editDialogStock, setEditDialogStock] = useState({});
+
   const rowActions = [
     {
       icon: 'eye-open',
+      click: (e, row) => {
+        e.preventDefault();
+        setDetailsDialog(true);
+        setDetailsDialogTitle(row.name);
+      }
+    },
+    {
+      icon: 'edit',
+      click: (e, row) => {
+        e.preventDefault();
+        setEditDialog(true);
+        setEditDialogStock(row);
+      }
+    },
+    {
+      icon: 'import',
+      click: (e, row) => {
+        e.preventDefault();
+        setDetailsDialog(true);
+        setDetailsDialogTitle(row.name);
+      }
+    },
+    {
+      icon: 'export',
+      click: (e, row) => {
+        e.preventDefault();
+        setDetailsDialog(true);
+        setDetailsDialogTitle(row.name);
+      }
+    },
+    {
+      icon: 'data-connection',
       click: (e, row) => {
         e.preventDefault();
         setDetailsDialog(true);
@@ -190,6 +252,11 @@ function StocksTable() {
         dialog={detailsDialog}
         setDialog={setDetailsDialog}
         dialogTitle={detailsDialogTitle}></StockDetails>
+
+      <EditStockForm
+        dialog={editDialog}
+        setDialog={setEditDialog}
+        stock={editDialogStock}></EditStockForm>
     </Card>
   );
 }
