@@ -39,3 +39,8 @@
 .Collapse-table .row.row-no-data .col {
   text-align: center;
 }
+
+.Collapse-table .col.col-actions {
+  display: flex;
+  gap: 4px;
+}

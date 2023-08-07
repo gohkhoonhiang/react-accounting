@@ -23,7 +23,7 @@ function SimpleTable({ headers, rows, rowActions, pagination, onPageLeft, onPage
               </div>
             ))}
             {rowActions.length > 0 ? (
-              <div className="col">
+              <div className="col col-actions">
                 {rowActions.map((action, j) => (
                   <Button
                     small={true}

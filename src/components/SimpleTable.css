@@ -27,3 +27,8 @@
 .Simple-table .row.row-no-data .col {
   text-align: center;
 }
+
+.Simple-table .col.col-actions {
+  display: flex;
+  gap: 4px;
+}

@@ -64,7 +64,7 @@ function CollapseTable({
                 </div>
               ))}
               {rowActions.length > 0 ? (
-                <div className="col">
+                <div className="col col-actions">
                   {rowActions.map((action, l) => (
                     <Button
                       small={true}
