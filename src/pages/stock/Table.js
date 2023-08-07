@@ -74,7 +74,8 @@ function StocksTable() {
     },
     {
       key: 'totalPurchaseSum',
-      label: 'Total Purchase Sum'
+      label: 'Total Purchase Sum',
+      formatter: (val) => `$${val.toFixed(2)}`
     },
     {
       key: 'shareCount',
