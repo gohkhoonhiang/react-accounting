@@ -1,3 +1,7 @@
+.Accounts-table .input-container {
+  width: 100%;
+}
+
 .Accounts-table .Collapse-table .row {
   grid-template-columns: 1fr 4fr 2fr 1fr;
 }
