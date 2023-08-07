@@ -19,7 +19,7 @@ function SimpleTable({ headers, rows, rowActions, pagination, onPageLeft, onPage
           <div className="row" key={i}>
             {headers.map((header, j) => (
               <div className="col" key={j}>
-                {row[header.key]}
+                {header.formatter ? header.formatter(row[header.key]) : row[header.key]}
               </div>
             ))}
             {rowActions.length > 0 ? (

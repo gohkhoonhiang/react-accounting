@@ -60,7 +60,7 @@ function CollapseTable({
               </div>
               {headers.map((header, k) => (
                 <div className="col" key={k}>
-                  {row[header.key]}
+                  {header.formatter ? header.formatter(row[header.key]) : row[header.key]}
                 </div>
               ))}
               {rowActions.length > 0 ? (
