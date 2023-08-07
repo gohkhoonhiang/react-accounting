@@ -15,6 +15,7 @@ import CollapseTable from '../../components/CollapseTable';
 import InfoCard from '../../components/InfoCard';
 import StockDetails from './Details';
 import EditStockForm from './EditStock';
+import BuyStockForm from './Buy';
 import './Stock.css';
 
 ChartJS.register(
@@ -168,6 +169,9 @@ function StocksTable() {
   const [editDialog, setEditDialog] = useState(false);
   const [editDialogStock, setEditDialogStock] = useState({});
 
+  const [buyDialog, setBuyDialog] = useState(false);
+  const [buyDialogStock, setBuyDialogStock] = useState({});
+
   const rowActions = [
     {
       icon: 'eye-open',
@@ -189,8 +193,8 @@ function StocksTable() {
       icon: 'import',
       click: (e, row) => {
         e.preventDefault();
-        setDetailsDialog(true);
-        setDetailsDialogTitle(row.name);
+        setBuyDialog(true);
+        setBuyDialogStock(row);
       }
     },
     {
@@ -245,21 +249,23 @@ function StocksTable() {
           expandedField={expandedField}
           pagination={stocksPagination}
           onPageLeft={stocksPageLeft}
-          onPageRight={stocksPageRight}
-        ></CollapseTable>
+          onPageRight={stocksPageRight}></CollapseTable>
       </div>
 
       <StockDetails
         dialog={detailsDialog}
         setDialog={setDetailsDialog}
-        dialogTitle={detailsDialogTitle}
-      ></StockDetails>
+        dialogTitle={detailsDialogTitle}></StockDetails>
 
       <EditStockForm
         dialog={editDialog}
         setDialog={setEditDialog}
-        stock={editDialogStock}
-      ></EditStockForm>
+        stock={editDialogStock}></EditStockForm>
+
+      <BuyStockForm
+        dialog={buyDialog}
+        setDialog={setBuyDialog}
+        stock={buyDialogStock}></BuyStockForm>
     </Card>
   );
 }
