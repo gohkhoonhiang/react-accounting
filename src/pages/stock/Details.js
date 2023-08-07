@@ -24,7 +24,8 @@ function StockDetails({ dialog, setDialog, dialogTitle }) {
       title={dialogTitle}
       icon="list"
       isOpen={dialog}
-      onClose={closeDialog}>
+      onClose={closeDialog}
+    >
       <DialogBody>
         <Tabs onChange={handleTabChange} selectedTabId={activeTabId}>
           <Tab id="purchase" title="Purchase History" panel={<PurchaseHistory />} />

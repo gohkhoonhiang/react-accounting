@@ -63,8 +63,7 @@ function BudgetTable() {
         rowIndex={rowIndex}
         columnIndex={columnIndex}
         value={budgets[rowIndex].budgetedAmount}
-        onConfirm={handleBudgetedAmountConfirm}
-      ></EditableCell2>
+        onConfirm={handleBudgetedAmountConfirm}></EditableCell2>
     );
   };
 
@@ -78,8 +77,7 @@ function BudgetTable() {
         rowIndex={rowIndex}
         columnIndex={columnIndex}
         value={budgets[rowIndex].actualAmount}
-        onConfirm={handleActualAmountConfirm}
-      ></EditableCell2>
+        onConfirm={handleActualAmountConfirm}></EditableCell2>
     );
   };
 
@@ -110,8 +108,7 @@ function BudgetTable() {
           itemPredicate={filterItem}
           itemRenderer={renderItem}
           noResults={<MenuItem disabled={true} text="No results." roleStructure="listoption" />}
-          onItemSelect={(v) => handleAllocatedAccountChange(v, rowIndex)}
-        >
+          onItemSelect={(v) => handleAllocatedAccountChange(v, rowIndex)}>
           <Button
             text={allocatedAccountDisplay(budgets[rowIndex].allocatedAccount)}
             rightIcon="double-caret-vertical"
@@ -177,8 +174,7 @@ function BudgetTable() {
           numRows={budgets.length}
           cellRendererDependencies={[budgets]}
           defaultRowHeight={50}
-          columnWidths={[null, null, null, null, null, null, 250]}
-        >
+          columnWidths={[null, null, null, null, null, null, 250]}>
           <Column name="Category" cellRenderer={categoryRenderer} />
           <Column name="Sub-category" cellRenderer={subCategoryRenderer} />
           <Column name="Remarks" cellRenderer={remarksRenderer} />
@@ -196,10 +192,11 @@ function BudgetTable() {
       </div>
 
       <AddBudgetForm dialog={addBudgetDialog} setDialog={setAddBudgetDialog}></AddBudgetForm>
+
       <DuplicateBudgetForm
         dialog={duplicateBudgetDialog}
-        setDialog={setDuplicateBudgetDialog}
-      ></DuplicateBudgetForm>
+        setDialog={setDuplicateBudgetDialog}></DuplicateBudgetForm>
+
       <AddRowForm dialog={addRowDialog} setDialog={setAddRowDialog}></AddRowForm>
     </Card>
   );

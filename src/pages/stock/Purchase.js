@@ -137,7 +137,8 @@ function PurchaseHistory() {
         expandedField={expandedField}
         pagination={purchasesPagination}
         onPageLeft={purchasesPageLeft}
-        onPageRight={purchasesPageRight}></CollapseTable>
+        onPageRight={purchasesPageRight}
+      ></CollapseTable>
     </div>
   );
 }

@@ -348,7 +348,8 @@ function VariableExpensesTable() {
           enableRowHeader={false}
           enableColumnResizing={false}
           enableRowResizing={false}
-          selectionModes={SelectionModes.NONE}>
+          selectionModes={SelectionModes.NONE}
+        >
           <Column name="Month" cellRenderer={monthCellRenderer} />
           {categories.map((category, i) => (
             <Column key={i} name={category.name} cellRenderer={category.renderer} />

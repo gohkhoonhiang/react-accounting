@@ -56,8 +56,7 @@ function TransferIn() {
           itemPredicate={filterItem}
           itemRenderer={renderItem}
           noResults={<MenuItem disabled={true} text="No results." roleStructure="listoption" />}
-          onItemSelect={setToBucket}
-        >
+          onItemSelect={setToBucket}>
           <Button
             text={toBucket ? toBucket.label : 'Select bucket...'}
             rightIcon="double-caret-vertical"

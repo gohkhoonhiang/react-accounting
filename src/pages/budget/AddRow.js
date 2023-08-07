@@ -61,8 +61,7 @@ function AddRowForm({ dialog, setDialog }) {
             itemPredicate={filterItem}
             itemRenderer={renderItem}
             noResults={<MenuItem disabled={true} text="No results." roleStructure="listoption" />}
-            onItemSelect={setCategory}
-          >
+            onItemSelect={setCategory}>
             <Button
               text={category ? category.label : 'Select category...'}
               rightIcon="double-caret-vertical"
@@ -77,8 +76,7 @@ function AddRowForm({ dialog, setDialog }) {
             itemPredicate={filterItem}
             itemRenderer={renderItem}
             noResults={<MenuItem disabled={true} text="No results." roleStructure="listoption" />}
-            onItemSelect={setSubCategory}
-          >
+            onItemSelect={setSubCategory}>
             <Button
               text={subCategory ? subCategory.label : 'Select sub-category...'}
               rightIcon="double-caret-vertical"

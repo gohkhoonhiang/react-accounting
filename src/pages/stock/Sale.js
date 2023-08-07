@@ -137,7 +137,8 @@ function SaleHistory() {
         expandedField={expandedField}
         pagination={salesPagination}
         onPageLeft={salesPageLeft}
-        onPageRight={salesPageRight}></CollapseTable>
+        onPageRight={salesPageRight}
+      ></CollapseTable>
     </div>
   );
 }

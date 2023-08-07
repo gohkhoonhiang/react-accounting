@@ -245,18 +245,21 @@ function StocksTable() {
           expandedField={expandedField}
           pagination={stocksPagination}
           onPageLeft={stocksPageLeft}
-          onPageRight={stocksPageRight}></CollapseTable>
+          onPageRight={stocksPageRight}
+        ></CollapseTable>
       </div>
 
       <StockDetails
         dialog={detailsDialog}
         setDialog={setDetailsDialog}
-        dialogTitle={detailsDialogTitle}></StockDetails>
+        dialogTitle={detailsDialogTitle}
+      ></StockDetails>
 
       <EditStockForm
         dialog={editDialog}
         setDialog={setEditDialog}
-        stock={editDialogStock}></EditStockForm>
+        stock={editDialogStock}
+      ></EditStockForm>
     </Card>
   );
 }

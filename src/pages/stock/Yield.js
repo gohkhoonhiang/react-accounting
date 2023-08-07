@@ -82,7 +82,8 @@ function YieldHistory() {
         rowActions={actions}
         pagination={pagination}
         onPageLeft={pageLeft}
-        onPageRight={pageRight}></SimpleTable>
+        onPageRight={pageRight}
+      ></SimpleTable>
     </div>
   );
 }
