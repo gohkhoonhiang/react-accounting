@@ -17,6 +17,7 @@ import StockDetails from './Details';
 import EditStockForm from './EditStock';
 import BuyStockForm from './Buy';
 import SellStockForm from './Sell';
+import ImportPriceForm from './ImportPrice';
 import './Stock.css';
 
 ChartJS.register(
@@ -176,6 +177,9 @@ function StocksTable() {
   const [sellDialog, setSellDialog] = useState(false);
   const [sellDialogStock, setSellDialogStock] = useState({});
 
+  const [importDialog, setImportDialog] = useState(false);
+  const [importDialogStock, setImportDialogStock] = useState({});
+
   const rowActions = [
     {
       icon: 'eye-open',
@@ -213,8 +217,8 @@ function StocksTable() {
       icon: 'data-connection',
       click: (e, row) => {
         e.preventDefault();
-        setDetailsDialog(true);
-        setDetailsDialogTitle(row.name);
+        setImportDialog(true);
+        setImportDialogStock(row);
       }
     }
   ];
@@ -275,6 +279,11 @@ function StocksTable() {
         dialog={sellDialog}
         setDialog={setSellDialog}
         stock={sellDialogStock}></SellStockForm>
+
+      <ImportPriceForm
+        dialog={importDialog}
+        setDialog={setImportDialog}
+        stock={importDialogStock}></ImportPriceForm>
     </Card>
   );
 }
